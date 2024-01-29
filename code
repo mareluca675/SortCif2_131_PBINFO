@@ -1,0 +1,55 @@
+#include <fstream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+struct elem
+{
+    int nr;
+    int primaCif;
+}vec[1001];
+
+int pc(int n)
+{
+    while(n > 9)
+    {
+        n = n / 10;
+    }
+    
+    return n;
+}
+
+int cmp(elem a, elem b)
+{
+    if(a.primaCif > b.primaCif)
+    {
+        return false;
+    }
+    
+    return true;
+}
+
+int main()
+{
+    ifstream cin("sortcif2.in");
+    ofstream cout("sortcif2.out");
+    
+    int n, i;
+    cin >> n;
+    
+    for(i = 1; i <= n; i ++)
+    {
+        cin >> vec[i].nr;
+        vec[i].primaCif = pc(vec[i].nr);
+    }
+    
+    sort(1 + vec, 1 + vec + n, cmp);
+    
+    for(i = 1; i <= n; i ++)
+    {
+        cout << vec[i].nr << ' ';
+    }
+    
+    return 0;
+}
